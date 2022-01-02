@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/tasks_list.dart';
-
+import 'package:todo_app/models/task.dart';
 import 'bottom_sheet_screen.dart';
 
-class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
+class TasksScreen extends StatefulWidget {
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> taskList = [
+    Task(name: 'tatakae'),
+    Task(name: 'give on your dream and die'),
+    Task(name: "shinzou sasageyo"),
+  ];
+
+  void addTasktoList(Task newTask) {
+    setState(() {
+      taskList.add(newTask);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +82,9 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(30),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(
+                taskList: taskList,
+              ),
             ),
           ),
         ],
@@ -76,7 +93,10 @@ class TasksScreen extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (context) => BottomSheetScreen());
+              context: context,
+              builder: (context) => BottomSheetScreen(
+                    addTask: addTasktoList,
+                  ));
         },
         backgroundColor: Colors.lightBlueAccent,
       ),

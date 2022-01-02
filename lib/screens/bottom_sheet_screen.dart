@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/task.dart';
 
-class BottomSheetScreen extends StatelessWidget {
+class BottomSheetScreen extends StatefulWidget {
+  void Function(Task) addTask;
+  BottomSheetScreen({required this.addTask});
+
+  @override
+  State<BottomSheetScreen> createState() => _BottomSheetScreenState();
+}
+
+class _BottomSheetScreenState extends State<BottomSheetScreen> {
+  String newTaskName = '';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,12 +40,21 @@ class BottomSheetScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               cursorColor: Colors.lightBlueAccent,
               autofocus: true,
+              onChanged: (newval) {
+                newTaskName = newval;
+                // print(newTaskName);
+              },
             ),
             SizedBox(
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                widget.addTask(Task(name: newTaskName));
+                Navigator.pop(context);
+
+                // print(newTaskName);
+              },
               child: Text('Add'),
               style: ElevatedButton.styleFrom(
                   primary: Colors.lightBlueAccent, elevation: 0.0),
