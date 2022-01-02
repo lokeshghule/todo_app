@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/tasks_list.dart';
 import 'package:todo_app/models/task.dart';
 import 'bottom_sheet_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_data.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -9,16 +11,10 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> taskList = [
-    Task(name: 'tatakae'),
-    Task(name: 'give on your dream and die'),
-    Task(name: "shinzou sasageyo"),
-  ];
-
   void addTasktoList(Task newTask) {
-    setState(() {
-      taskList.add(newTask);
-    });
+    // setState(() {
+    //   taskList.add(newTask);
+    // });
   }
 
   @override
@@ -35,7 +31,7 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
@@ -60,12 +56,12 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 5,
                 ),
                 Text(
-                  '12 tasks',
+                  '${Provider.of<taskData>(context).taskList.length} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -83,8 +79,8 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
               ),
               child: TasksList(
-                taskList: taskList,
-              ),
+                  // taskList: Provider.of<TasksList>(context).taskList,
+                  ),
             ),
           ),
         ],
