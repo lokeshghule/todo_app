@@ -67,7 +67,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(30),
                 ),
               ),
-              child: const TasksList(),
+              child: TasksList(),
             ),
           ),
         ],
