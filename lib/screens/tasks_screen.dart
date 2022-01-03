@@ -56,7 +56,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 5,
                 ),
                 Text(
-                  '${Provider.of<taskData>(context).taskList.length} tasks',
+                  '${Provider.of<taskData>(context).taskCount} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -89,10 +89,7 @@ class _TasksScreenState extends State<TasksScreen> {
         child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              builder: (context) => BottomSheetScreen(
-                    addTask: addTasktoList,
-                  ));
+              context: context, builder: (context) => BottomSheetScreen());
         },
         backgroundColor: Colors.lightBlueAccent,
       ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_data.dart';
 
 class BottomSheetScreen extends StatefulWidget {
-  void Function(Task) addTask;
-  BottomSheetScreen({required this.addTask});
-
   @override
   State<BottomSheetScreen> createState() => _BottomSheetScreenState();
 }
@@ -50,7 +49,9 @@ class _BottomSheetScreenState extends State<BottomSheetScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                widget.addTask(Task(name: newTaskName));
+                Provider.of<taskData>(context, listen: false)
+                    .addTask(newTaskName);
+
                 Navigator.pop(context);
 
                 // print(newTaskName);
